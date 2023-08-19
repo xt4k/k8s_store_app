@@ -44,7 +44,7 @@ jobs:
         uses: azure/setup-kubectl@v1
       
       - name: Update Kubectl Context
-        run: aws eks update-kubeconfig --name adorable-party-1692453467 --refion us-east-1
+        run: aws eks update-kubeconfig --name adorable-party-1692453467 --region us-east-1
       
       - name: Deploy Image to AWS EKS
         run: |

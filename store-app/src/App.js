@@ -55,7 +55,7 @@ function App() {
           fontFamily="Robo"
           my="5px"
         >
-         SOmething new here
+         last time that I have changed something here
         </Text>
 
         <Checkout order={order} />

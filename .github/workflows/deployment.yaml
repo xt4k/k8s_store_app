@@ -33,10 +33,11 @@ jobs:
         id: build-image
         env:
           IMAGE_TAG: ${{ github.sha }}
+          DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG
-          echo "::set-output name=image::${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG"
+          docker build -t $DOCKER_USER/store-app_example:$IMAGE_TAG
+          docker push $DOCKER_USER/store-app_example:$IMAGE_TAG
+          echo "::set-output name=image::$DOCKER_USER/store-app_example:$IMAGE_TAG"
 
       # - name: other step that need existed image
       #   run: |

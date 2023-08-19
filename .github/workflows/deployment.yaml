@@ -40,6 +40,13 @@ jobs:
           docker push $DOCKER_USER/store-app_example:$IMAGE_TAG
           echo "::set-output name=image::$DOCKER_USER/store-app_example:$IMAGE_TAG"
 
-      # - name: other step that need existed image
-      #   run: |
-      #   ${{ step.build-image.outputs.image}}
+      - name: Install Kubectl
+        uses: azure/setup-kubectl@v1
+      
+      - name: Update Kubectl Context
+        run: aws eks update-lubeconfig --name adorable-party-1692453467 --refion us-east-1
+      
+      - name: Deploy Image to AWS EKS
+        run: |
+          kubectl set image deployment/store store=${{ steps.build-image.outputs.image }}
+

@@ -29,4 +29,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Build tag and pus Image to Docker Hub
+        id: build-image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG
+          echo "::set-output name=image::${{ secrets.DOCKERHUB_USERNAME }}/store-app_example:$IMAGE_TAG"
+
+      # - name: other step that need existed image
+      #   run: |
+      #   ${{ step.build-image.outputs.image}}
+
+
 
